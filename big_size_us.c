@@ -12,15 +12,15 @@ int fetch_size(const char *format, int *i)
 	int pre_i = *i + 1;
 	int size = 0;
 
-	if (format[int pre_i] == 'l')
+	if (format[pre_i] == 'l')
 		size = S_LONG;
-	else if (format[int pre_i] == 'h')
+	else if (format[pre_i] == 'h')
 		size = S_SHORT;
 
 	if (size == 0)
-		*i = int pre_i - 1;
+		*i = pre_i - 1;
 	else
-		*i = int pre_i;
+		*i = pre_i;
 
 	return (size);
 }
