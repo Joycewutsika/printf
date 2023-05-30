@@ -1,0 +1,92 @@
+.TH PRINTF 1.0 "May 2023" "The Modified Printf Manual"
+
+.SH NAME
+printf \- the various functionality of printf
+
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B int printf(const char *format, ...);
+
+.SH DESCRIPTION
+The printf function is used to create formatted output at runtime. It writes the output to the standard output (stdout) stream as stated in format using the format specifiers.
+
+The printf argument is a string that may contain format specifiers pointed by format. Format specifiers begin with the percent character (%), followed by a conversion specifier character that indicates what type of data to be printed. 
+
+The printf function returns characters , or a negative value if there are errors.
+
+.SH CONVERSION SPECIFIERS
+The follwing are conversion specifiers used by printf
+++-:
+
+.TP
+%x
+Prints unsigned hexadecimal integer
+
+.TP
+% X
+Prints unsigned hexadecimal integer (upper)
+
+.TP
+%d, %i
+Prints a signed decimal integer.
+
+.TP
+%u
+Prints an unsigned decimal integer.
+
+.TP
+%c
+Prints a character.
+
+.TP
+% o
+Prints - unsigned octal
+
+.TP
+%s
+Prints a string of characters.
++
+
+
+.TP
+%p
+Prints a pointer address.
+
+.TP
+%%
+Prints a percent character.
+
+.SH FLAG SPECIFIERS
+.SH ""
+
+custom and non-custom specifier modifiers
+
+.SH THE LENGTH MODIFIERS
+.SH ""
+
+Length modifiers.
+
+
+.SH RETURN VALUE
+The printf function returns the number of characters written on success and negative value on error.
+
+.SH EXAMPLES
+.PP
+The following examples demonstrate the usage of printf:
+
+.B printf("Hi, %s!\n", "dear");
+.PP
+This prints the string "Hi, dear!" to the standard output.
+
+.B int value = 98;
+.B printf("The answer is %d.\n", value);
+.PP
+This prints the value of the variable as "The answer is 98.".
+
+.SH AUTHORS
+This man page and the entire printf functions project were written; 
+Joyce Wutsika
+Sandra Boadi
+
+
