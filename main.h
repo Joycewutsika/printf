@@ -81,7 +81,7 @@ char buffer[],
 int add_hex_code(char, char[], int);
 int is_visible(char);
 int is_digit(char);
-int fetch_flags(const*format. unt *i);
+int fetch_flags(const *format, unt *i);
 int fetch_width(const char *format, int *i, va_list joy);
 int fetch_precision(const char *format, int *i, va_list joy);
 int fetch_size(const char *format, int *i);
