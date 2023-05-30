@@ -18,9 +18,9 @@ int fetch_precision(const char *format, int *i, va_list joy)
 
 	precision = 0;
 
-	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
+	for (pre_i += 1; format[pre_i] != '\0'; pre_i++)
 	{
-		if (is_digit(format[curr_i]))
+		if (is_digit(format[pre_i]))
 		{
 			precision *= 10;
 			precision += format[pre_i] - '0';
