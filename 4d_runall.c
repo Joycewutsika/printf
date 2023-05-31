@@ -16,17 +16,17 @@ int print_unsigned(va_list joy, char buffer[],
 	int x = BUFF_SIZE - 2;
 	unsigned long int num = va_arg(joy, unsigned long int);
 
-	fig = convert_size_unsigned int(fig, size);
+	num = convert_size_unsigned(num, size);
 
-	if (fig == 0)
+	if (num == 0)
 		buffer[x--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
 
-	while (fig > 0)
+	while (num > 0)
 	{
-		buffer[x--] = (fig % 10) + '0';
-		fig /= 10;
+		buffer[x--] = (num % 10) + '0';
+		num /= 10;
 	}
 
 	x++;
@@ -49,12 +49,12 @@ int print_octal(va_list joy, char buffer[],
 {
 
 	int g = BUFF_SIZE - 2;
-	unsigned long int num = va_arg(joy, unsigned long int);
-	unsigned long int init_num = fig;
+	unsigned long int fig = va_arg(joy, unsigned long int);
+	unsigned long int init_fig = fig;
 
 	UNUSED(width);
 
-	fig = convert_size_unsigned int(fig, size);
+	fig = convert_size_unsigned(fig, size);
 
 	if (fig == 0)
 		buffer[g--] = '0';
@@ -126,32 +126,31 @@ int print_hexa(va_list joy, char map_to[], char buffer[],
 	int flags, char flag_ch, int width, int precision, int size)
 {
 	int m = BUFF_SIZE - 2;
-	unsigned long int num = va_arg(types, unsigned long int);
-	unsigned long int init_num = fig;
+	unsigned long int num = va_arg(joy, unsigned long int);
+	unsigned long int init_num = num;
 
 	UNUSED(width);
 
-	fig = convert_size_unsgnd(fig, size);
+	num = convert_size_unsigned(num, size);
 
-	if (fig == 0)
+	if (num == 0)
 		buffer[m--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
 
-	while (fig > 0)
+	while (num > 0)
 	{
-		buffer[m--] = map_to[fig % 16];
-		fig /= 16;
+		buffer[m--] = map_to[num % 16];
+		num /= 16;
 	}
 
-	if (flags & F_HASH && init_fig != 0)
+	if (flags & F_HASH && init_num != 0)
 	{
 		buffer[m--] = flag_ch;
 		buffer[m--] = '0';
 	}
 
-	i++;
+	m++;
 
 	return (unsigned_to_string(0, m, buffer, flags, width, precision, size));
 }
-
