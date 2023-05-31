@@ -46,11 +46,8 @@ int print_string(va_list joy, char buffer[],
 			str = "      ";
 	}
 
-	while (*str != '\0')
-	{
+	while (str[len] != '\0')
 		len++;
-		str++;
-	}
 
 	if (precision >= 0 && precision < len)
 		len = precision;
@@ -59,7 +56,7 @@ int print_string(va_list joy, char buffer[],
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, str, len);
+			write(1, &str[0], len);
 			for (x = width - len; x > 0; x--)
 				write(1, " ", 1);
 			return (width);
@@ -68,7 +65,7 @@ int print_string(va_list joy, char buffer[],
 		{
 			for (x = width - len; x > 0; x--)
 				write(1, " ", 1);
-			write(1, str, len);
+			write(1, &str[0], len);
 			return (width);
 		}
 	}
