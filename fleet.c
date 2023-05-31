@@ -12,7 +12,7 @@
  * Return: 1 or 2;
  */
 int process_print(const char *detail, int *i, va_list joy, char buffer[],
-	int flags, int width, int precision, int size)
+		int flags, int width, int precision, int size)
 {
 	int x, len1 = 0, output_chars = -1;
 	detail_t detail_types[] = {
@@ -23,26 +23,26 @@ int process_print(const char *detail, int *i, va_list joy, char buffer[],
 		{'r', print_rever}, {'R', print_rot13}, {'\0', NULL}
 	};
 	for (x = 0; detail_types[x].detail != '\0'; x++)
-		if (detail[*ind] == detail_types[x].detail)
+		if (detail[*i] == detail_types[x].detail)
 			return (detail_types[x].fxn(joy, buffer, flags, width, precision, size));
 
 	if (detail_types[x].detail == '\0')
 	{
-		if (detail[*ind] == '\0')
+		if (detail[*i] == '\0')
 			return (-1);
 		len1 += write(1, "%%", 1);
-		if (detail[*ind - 1] == ' ')
+		if (detail[*i - 1] == ' ')
 			len1 += write(1, " ", 1);
 		else if (width)
 		{
-			--(*ind);
-			while (detail[*ind] != ' ' && detail[*ind] != '%')
-				--(*ind);
-			if (detail[*ind] == ' ')
-				--(*ind);
+			--(*i);
+			while (detail[*i] != ' ' && detail[*i] != '%')
+				--(*i);
+			if (detail[*i] == ' ')
+				--(*i);
 			return (1);
 		}
-		len1 += write(1, &detail[*ind], 1);
+		len1 += write(1, &detail[*i], 1);
 		return (len1);
 	}
 	return (output_chars);
