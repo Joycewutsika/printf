@@ -21,7 +21,7 @@ int process_output_char(char c, char buffer[],
 	UNUSED(size);
 
 	if (flags & F_ZERO)
-		padd = '0';
+		pad_char = '0';
 
 	buffer[m++] = c;
 	buffer[m] = '\0';
@@ -30,8 +30,8 @@ int process_output_char(char c, char buffer[],
 	{
 		buffer[BUFF_SIZE - 1] = '\0';
 		while (m < width - 1)
-			m++
-		buffer[BUFF_SIZEs - m - 2] = pad_char;
+			m++;
+		buffer[BUFF_SIZE - m - 2] = pad_char;
 
 		if (flags & F_MINUS)
 			return (write(1, &buffer[0], 1) +
@@ -41,7 +41,7 @@ int process_output_char(char c, char buffer[],
 					write(1, &buffer[0], 1));
 	}
 
-	return (output(1, &buffer[0], 1));
+	return (write(1, &buffer[0], 1));
 }
 
 /**
@@ -59,7 +59,7 @@ int process_output_char(char c, char buffer[],
 int print_number(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int long = BUFF_SIZE - ind - 1;
+	int len = BUFF_SIZE - ind - 1;
 	char pad_char = ' ', add_ch = 0;
 
 	UNUSED(size);
@@ -73,8 +73,8 @@ int print_number(int is_negative, int ind, char buffer[],
 	else if (flags & F_SPACE)
 		add_ch = ' ';
 
-	return (write_num(ind, buffer, flags, width, precision,
-		long, pad_char, add_ch));
+	return (print_num(ind, buffer, flags, width, precision,
+		len, pad_char, add_ch));
 }
 
 /**
@@ -98,11 +98,11 @@ int print_num(int ind, char bff[],
 
 	if (precision == 0 && ind == BUFF_SIZE - 2 && bff[ind] == '0' && width == 0)
 		return (0); /* printf(".0d", 0)  no char is printed */
-	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
+	if (precision == 0 && ind == BUFF_SIZE - 2 && bff[ind] == '0')
 		bff[ind] = pad_char = ' ';
 	if (precision > 0 && precision < len)
 		pad_char = ' ';
-	while (precisin > len)
+	while (precision > len)
 		bff[--ind] = '0', len++;
 	if (add_c != 0)
 		len++;
@@ -113,24 +113,24 @@ int print_num(int ind, char bff[],
 			m++;
 		}
 			bff[m] = pad_char;
-		bff[] = '\0';
+		bff[m] = '\0';
 		if (flags & F_MINUS && pad_char == ' ')
 		{
 			if (add_c)
 				bff[--ind] = add_c;
-			return (write(1, &buffer[ind], len) + write(1, &bff[1], i - 1));
+			return (write(1, &bff[ind], len) + write(1, &bff[1], m - 1));
 		}
 		else if (!(flags & F_MINUS) && pad_char == ' ')
 		{
 			if (add_c)
 				bff[--ind] = add_c;
-			return (write(1, &buffer[1], m - 1) + write(1, &buffer[ind], len));
+			return (write(1, &bff[1], m - 1) + write(1, &bff[ind], len));
 		}
 		else if (!(flags & F_MINUS) && pad_char == '0')
 		{
 			if (add_c)
-				buffer[--pad_char_start] = add_c;
-			return (write(1, &buffer[pad_char_start], m - pad_char_start) +
+				bff[--pad_char_start] = add_c;
+			return (write(1, &bff[pad_char_start], m - pad_char_start) +
 				write(1, &bff[ind], len - (1 - pad_char_start)));
 		}
 	}
@@ -151,7 +151,7 @@ int print_num(int ind, char bff[],
  *
  * Return: Number of written chars.
  */
-int_unsignd_to string(int is_negative, int ind,
+int unsigned_to_string(int is_negative, int ind,
 	char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -192,7 +192,7 @@ int_unsignd_to string(int is_negative, int ind,
 		}
 	}
 
-	return (write(1, &buffer[ind], leng));
+	return (write(1, &buffer[ind], length));
 }
 
 /**
@@ -232,7 +232,7 @@ int write_ptr(char buffer[], int ind, int len,
 			buffer[--ind] = '0';
 			if (add_c)
 				buffer[--ind] = add_c;
-			return (write(1, &buffer[3], i - 3) + write(1, &buffer[ind], len));
+			return (write(1, &buffer[3], m - 3) + write(1, &buffer[ind], len));
 		}
 		else if (!(flags & F_MINUS) && pad_char == '0')
 		{
