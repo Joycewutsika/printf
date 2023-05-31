@@ -122,7 +122,7 @@ int print_Hex_up(va_list joy, char buffer[],
  * @size: Size
  * Return: Number of characters printed
  */
-int print_hexa(va_list joy, char map_to[], char buffer[],
+int print_hex(va_list joy, char map_to[], char buffer[],
 	int flags, char flag_ch, int width, int precision, int size)
 {
 	int m = BUFF_SIZE - 2;

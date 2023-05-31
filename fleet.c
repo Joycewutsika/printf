@@ -22,11 +22,13 @@ int process_print(const char *detail, int *i, va_list joy, char buffer[],
 		{"X", print_Hex_up}, {"p", print_pointer}, {"S", display_non_print_char},
 		{"r", print_rever}, {"R", print_rot13}, {'\0', NULL}
 	};
-	for (x = 0; detail_types[x].detail != '\0'; x++)
-		if (detail[*i] == detail_types[x].detail)
+	for (x = 0; detail_types[x].detail != NULL; x++)
+	{
+		if (detail[*i] == *(detail_types[x].detail))
 			return (detail_types[x].fxn(joy, buffer, flags, width, precision, size));
+	}
 
-	if (detail_types[x].detail == '\0')
+	if (detail_types[x].detail == NULL)
 	{
 		if (detail[*i] == '\0')
 			return (-1);
