@@ -17,24 +17,25 @@
 #define F_HASH 8
 
 /**
- * struct detail - it maps the conversion specifier for printf
+ * struct sym - struct conversion
  *
- * @detail: The specifer format.
+ * @sym: format.
  * @fxn: The function associated.
  */
-struct detail
+struct sym
 {
-	char *detail;
+	char *sym;
 	int (*fxn)(va_list, char[], int, int, int, int);
 };
 
+
 /**
- * typedef struct detail detail_t - it maps the conversion specifier for printf
+ * typedef struct sym sym_t - struct conversion
  *
- * @detail: The format specifier
- * @detail_t: The function associated.
+ * @sym: format
+ * @sym_t: The function associated.
  */
-typedef struct detail detail_t;
+typedef struct sym sym_t;
 
 int print_int(va_list joy, char buffer[],
 	int flags, int width, int precision, int size);
@@ -65,8 +66,8 @@ int print_Hex_up(va_list joy, char buffer[],
 int _printf(const char *format, ...);
 int display_non_print_char(va_list joy, char buffer[],
 	int flags, int width, int precision, int size);
-int process_print(const char *detail, int *i,
-va_list joy, char buffer[], int flags, int width, int precision, int size);
+int process_print(const char *sym, int *ind,
+		va_list joy, char buffer[], int flags, int width, int precision, int size);
 int write_ptr(char buffer[], int ind, int len,
 	int width, int flags, char pad_char, char add_c, int pad_char_start);
 int print_num(int ind, char bff[], int flags, int width, int precision,
