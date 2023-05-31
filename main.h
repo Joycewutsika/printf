@@ -79,7 +79,7 @@ int unsigned_to_string(int is_negative, int ind,
 char buffer[],
 	int flags, int width, int precision, int size);
 int add_hex_code(char, char[], int);
-int is_visible(char);
+int is_visible(char c);
 int is_digit(char);
 int fetch_flags(const char *format, int *i);
 int fetch_width(const char *format, int *i, va_list joy);
