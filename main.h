@@ -36,6 +36,7 @@ struct detail
  */
 typedef struct detail detail_t;
 
+/* functions to print char and string */
 int print_char(va_list joy, char buffer[],
 	int flags, int width, int precision, int size);
 int print_string(va_list joy, char buffer[],
@@ -80,7 +81,7 @@ char buffer[],
 int add_hex_code(char, char[], int);
 int is_visible(char);
 int is_digit(char);
-int fetch_flags(const *format, int *i);
+int fetch_flags(const char *format, int *i);
 int fetch_width(const char *format, int *i, va_list joy);
 int fetch_precision(const char *format, int *i, va_list joy);
 int fetch_size(const char *format, int *i);
