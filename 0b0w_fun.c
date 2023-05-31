@@ -31,8 +31,8 @@ int print_char(va_list joy, char buffer[],
 int print_string(va_list joy, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int len = 0, x
-	char *str = va_arg(joy, char *);
+	int len = 0, x;
+	char str = va_arg(joy, char *);
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -120,18 +120,18 @@ int print_int(va_list joy, char buffer[],
 		buffer[m--] = '0';
 
 	buffer[BUFF_SIZE - 1] = '\0';
-	fig = (unsigned long int)z;
+	num = (unsigned long int)z;
 
 	if (z < 0)
 	{
-		fig = (unsigned long int)((-1) * z);
+		num = (unsigned long int)((-1) * z);
 		is_negative = 1;
 	}
 
-	while (fig > 0)
+	while (num > 0)
 	{
-		buffer[m--] = (fig % 10) + '0';
-		fig /= 10;
+		buffer[m--] = (num % 10) + '0';
+		num /= 10;
 	}
 
 	m++;
