@@ -6,7 +6,7 @@
  *
  * Return: 1 if c is visible, 0 otherwise
  */
-int is_visible(c)
+int is_visible(char c)
 {
 	if (c >= 32 && c < 127)
 		return (1);
