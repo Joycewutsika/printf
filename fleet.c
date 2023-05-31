@@ -3,7 +3,7 @@
  * process_print - based on its type it prints an argument
  * @detail: string format specifier
  * @joy: List of arguments
- * @ind: ind.
+ * @i: ind.
  * @buffer: Buffer array
  * @flags: flags
  * @width: width
@@ -11,7 +11,7 @@
  * @size: Size
  * Return: 1 or 2;
  */
-int process_print(const char *detail, int *ind, va_list joy, char buffer[],
+int process_print(const char *detail, int *i, va_list joy, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int x, len1 = 0, output_chars = -1;
