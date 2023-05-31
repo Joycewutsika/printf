@@ -32,7 +32,7 @@ int print_string(va_list joy, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int len = 0, x;
-	char str = va_arg(joy, char *);
+	char *str = va_arg(joy, char *);
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -46,8 +46,11 @@ int print_string(va_list joy, char buffer[],
 			str = "      ";
 	}
 
-	while (str[len] != '\0')
+	while (*str != '\0')
+	{
 		len++;
+		str++;
+	}
 
 	if (precision >= 0 && precision < len)
 		len = precision;
@@ -56,7 +59,7 @@ int print_string(va_list joy, char buffer[],
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, &str[0], len);
+			write(1, str, len);
 			for (x = width - len; x > 0; x--)
 				write(1, " ", 1);
 			return (width);
@@ -65,7 +68,7 @@ int print_string(va_list joy, char buffer[],
 		{
 			for (x = width - len; x > 0; x--)
 				write(1, " ", 1);
-			write(1, &str[0], len);
+			write(1, str, len);
 			return (width);
 		}
 	}
@@ -171,7 +174,7 @@ int print_binary(va_list joy, char buffer[],
 		y /= 2;
 		g[f] = (f / y) % 2;
 	}
-	for (p = 0, total = 0, account = 0; p < 32; i++)
+	for (p = 0, total = 0, account = 0; p < 32; p++)
 	{
 		total += g[p];
 		if (total || p == 31)
